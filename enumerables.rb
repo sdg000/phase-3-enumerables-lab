@@ -12,13 +12,14 @@ end
 # given an array of spicy foods, **return an array of strings**
 # with the names of each spicy food
 def get_names(spicy_foods)
-  # your code here
+  spicy_foods.collect{|item| item[:name]}
+  
 end
 
 # given an array of spicy foods, **return an array of hashes** 
 # where the heat level of the food is greater than 5
 def spiciest_foods(spicy_foods)
-  # your code here
+  spicy_foods.select{|item| item[:heat_level] > 5}
 end
 
 # given an array of spicy foods, **output to the terminal**
@@ -27,19 +28,25 @@ end
 # HINT: you can use * with a string to produce the correct number of 🌶 emoji. 
 # "hello" * 3 == "hellohellohello"
 def print_spicy_foods(spicy_foods)
-  # your code here
+  spicy_foods.collect do |item|
+    puts "#{item[:name]} (#{item[:cuisine]}) | Heat Level: #{'🌶' * item[:heat_level]}"
+  end
 end
 
 # given an array of spicy foods and a string representing a cuisine, **return a single hash**  
 # for the spicy food whose cuisine matches the cuisine being passed to the method
 def get_spicy_food_by_cuisine(spicy_foods, cuisine)
-  # your code here
+  spicy_foods.find do |item|
+    item[:cuisine] == cuisine
+  end
 end
 
 # Given an array of spicy foods, **return an array of hashes** 
 # sorted by heat level from lowest to highest
 def sort_by_heat(spicy_foods)
-  # your code here
+  spicy_foods.sort_by do |item|
+    item[:heat_level]
+  end
 end
 
 # given an array of spicy foods, output to the terminal ONLY 
@@ -47,11 +54,19 @@ end
 # Buffalo Wings (American) | Heat Level: 🌶🌶🌶
 # HINT: Try to use methods you've already written to solve this!
 def print_spiciest_foods(spicy_foods)
-  # your code here
+  spicy_foods.select do |item|
+    if item[:heat_level] > 5
+      puts "#{item[:name]} (#{item[:cuisine]}) | Heat Level: #{"🌶" * item[:heat_level]}"
+    else
+      nil
+    end
+  end
 end
 
 # given an array of spicy foods, return an integer representing 
 # the average heat level of all the spicy foods in the array
 def average_heat_level(spicy_foods)
-  # your code here
+  spicy_foods.sum do |item|
+    item[:heat_level] / spicy_foods.length
+  end
 end
